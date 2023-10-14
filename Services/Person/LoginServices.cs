@@ -1,5 +1,6 @@
 ﻿using lodging.Data;
 using lodging.Schemas;
+using lodging.Schemas.Person;
 
 namespace lodging.Services;
 
@@ -16,7 +17,7 @@ public class LoginServices
         {
             var userExists = context.Persons.FirstOrDefault(person =>
                 person.Password == method.EncryptingPassword(prop.Password)
-                && person.Cpf == prop.Cpf);
+                && person.Cpf == prop.Cpf && person.Email == prop.Email);
 
             if (userExists is null) return false;
 
@@ -25,11 +26,12 @@ public class LoginServices
             if (queryPerson is null) return null!;
 
             var token = generateToken.GenerateToken(queryPerson);
+            
             return token;
         }
     }
 
-    public bool VerifyCredentials(LoginSchema prop, ValidateCredentialsService verifyCredentials)
+    private bool VerifyCredentials(LoginSchema prop, ValidateCredentialsService verifyCredentials)
     {
         if (!verifyCredentials.ValidatePassword(prop.Password)) return false;
         if (!verifyCredentials.VaLidateEmail(prop.Email)) return false;
