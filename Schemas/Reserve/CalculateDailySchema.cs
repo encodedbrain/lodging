@@ -1,12 +1,16 @@
-﻿namespace lodging.Schemas;
+﻿namespace lodging.Schemas.Reserve;
 
-public class CalculateDaily
+public class CalculateDailySchema
 {
-    public CalculateDaily(string email, string password, int identifier)
+    public CalculateDailySchema(string email, string password, int identifier)
     {
         Email = email;
         Password = password;
         Identifier = identifier;
+    }
+
+    public CalculateDailySchema()
+    {
     }
 
     public string Email { get; set; }

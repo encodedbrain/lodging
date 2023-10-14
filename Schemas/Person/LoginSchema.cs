@@ -1,4 +1,4 @@
-﻿namespace lodging.Schemas;
+﻿namespace lodging.Schemas.Person;
 
 public class LoginSchema
 {
@@ -8,6 +8,11 @@ public class LoginSchema
         Email = email;
         Cpf = cpf;
     }
+
+    public LoginSchema()
+    {
+    }
+
     public string Email { get; set; }
     public string Password { get; set; }
     public string Cpf { get; set; } 

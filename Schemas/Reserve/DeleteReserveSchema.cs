@@ -1,4 +1,4 @@
-﻿namespace lodging.Schemas;
+﻿namespace lodging.Schemas.Reserve;
 
 public class DeleteReserveSchema
 {
@@ -12,6 +12,9 @@ public class DeleteReserveSchema
         IdentifierSuite = identifierSuite;
     }
 
+    public DeleteReserveSchema()
+    {
+    }
 
     public string Email { get; set; }
     public string Password { get; set; }

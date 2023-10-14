@@ -1,31 +1,33 @@
-﻿using lodging.Models;
+﻿namespace lodging.Schemas;
 
-namespace lodging.Schemas;
-
-public class reservationSchema
+public class ReservationSchema
 {
-    public reservationSchema(string name, string email, string password, string cpf, string phone, DateTime departureDate, DateTime entryDate, int room, string suite)
+    protected ReservationSchema(string name, string email, string password, string cpf, string phone, int room, string suite, int days, int childrens, int adults)
     {
         Name = name;
         Email = email;
         Password = password;
         Cpf = cpf;
         Phone = phone;
-        DepartureDate = departureDate;
-        EntryDate = entryDate;
         Room = room;
         Suite = suite;
+        Days = days;
+        Childrens = childrens;
+        Adults = adults;
+    }
+
+    public ReservationSchema()
+    {
     }
 
     public string Name { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
-
     public string Cpf { get; set; }
     public string Phone { get; set; }
-
-    public DateTime DepartureDate { get; set; }
-    public DateTime EntryDate { get; set; }
     public int Room { get; set; }
-    public string Suite { get; set; }
+    public string Suite { get; set; } 
+    public int Days { get; set; }
+    public int Childrens { get; set; }
+    public int Adults { get; set; }
 }

@@ -1,25 +1,29 @@
-﻿namespace lodging.Schemas;
+﻿namespace lodging.Schemas.Reserve;
 
 public class ReserveSchema
 {
-    public ReserveSchema(string email, string password, string cpf, DateTime entryDate, DateTime departureDate, int rooms, string typeSuite)
+    public ReserveSchema(string email, string password, string cpf, int rooms, string typeSuite, int days, int adults, int childrens)
     {
         Email = email;
         Password = password;
         Cpf = cpf;
-        EntryDate = entryDate;
-        DepartureDate = departureDate;
         Rooms = rooms;
         TypeSuite = typeSuite;
+        Days = days;
+        Adults = adults;
+        Childrens = childrens;
+    }
+
+    public ReserveSchema()
+    {
     }
 
     public string Email { get; set; }
     public string Password { get; set; }
     public string Cpf { get; set; }
-    public DateTime EntryDate { get; set; }
-    public DateTime DepartureDate { get; set; }
     public int Rooms { get; set; }
     public string TypeSuite { get; set; }
-    
-    
+    public int Days { get; set; }
+    public int Adults { get; set; }
+    public int Childrens { get; set; }
 }
