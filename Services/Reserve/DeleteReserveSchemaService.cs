@@ -1,5 +1,6 @@
 ﻿using lodging.Data;
 using lodging.Schemas;
+using lodging.Schemas.Reserve;
 
 namespace lodging.Services;
 
@@ -35,7 +36,7 @@ public class DeleteReserveSchemaService
         return true;
     }
 
-    public bool ValidateCredentials(DeleteReserveSchema prop, ValidateCredentialsService verifyCredentials)
+    private bool ValidateCredentials(DeleteReserveSchema prop, ValidateCredentialsService verifyCredentials)
     {
 
         if (!verifyCredentials.ValidateCpf(prop.Cpf)) return false;

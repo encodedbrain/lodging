@@ -1,8 +1,8 @@
 ﻿using lodging.Data;
 using lodging.Models;
-using lodging.Schemas;
+using lodging.Schemas.Reserve;
 
-namespace lodging.Services;
+namespace lodging.Services.Reserve;
 
 public class NewReserveService
 {
@@ -22,11 +22,16 @@ public class NewReserveService
 
             if (userExists is null) return false;
 
-            var newReserve = new Reserve()
+            var newReserve = new Models.Reserve()
             {
-                DepartureDate = DateTime.Now,
+                DepartureDate = DateTime.Now.AddDays(prop.Days),
                 EntryDate = DateTime.Now, Person = userExists,
-                Identifier = method.GenerateIdentifier()
+                Identifier = method.GenerateIdentifier(),
+                Daily = method.VerifyTypeSuite(prop.TypeSuite),
+                Days =  prop.Days,
+                Adults = prop.Adults,
+                Childrens = prop.Childrens
+                
                 
             };
             var newSuite = new Suite()
@@ -45,7 +50,7 @@ public class NewReserveService
         return true;
     }
 
-    public bool VerifyCredentials(ReserveSchema prop, ValidateCredentialsService verifyCredentials)
+    private bool VerifyCredentials(ReserveSchema prop, ValidateCredentialsService verifyCredentials)
     {
         if (!verifyCredentials.ValidatePassword(prop.Password)) return false;
         if (!verifyCredentials.VaLidateEmail(prop.Email)) return false;

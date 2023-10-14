@@ -2,11 +2,11 @@
 using lodging.Models;
 using lodging.Schemas;
 
-namespace lodging.Services;
+namespace lodging.Services.Reserve;
 
 public class ReservationService
 {
-    public async Task<object> Reservation(reservationSchema prop)
+    public async Task<object> Reservation(ReservationSchema prop)
     {
         var method = new ValidateCredentialsService();
 
@@ -16,19 +16,23 @@ public class ReservationService
         using (var context = new LodgingDb())
         {
             var generateToken = new TokenServices();
-            var newReserve = new Person()
+            var newReserve = new Models.Person()
             {
                 Name = prop.Name,
-                Cpf = prop.Cpf,
+                Cpf = method.ReturnCpfFormated(prop.Cpf),
                 Email = prop.Email,
                 Password = method.EncryptingPassword(prop.Password),
-                Reserve = new List<Reserve>()
+                Reserve = new List<Models.Reserve>()
                 {
                     new()
                     {
-                        DepartureDate = DateTime.Now,
+                        DepartureDate = DateTime.Now.AddDays(prop.Days),
                         EntryDate = DateTime.Now,
-                        Identifier = method.GenerateIdentifier() 
+                        Identifier = method.GenerateIdentifier(),
+                        Daily = method.VerifyTypeSuite(prop.Suite),
+                        Days =  prop.Days,
+                        Adults = prop.Adults,
+                        Childrens = prop.Childrens
                     }
                 },
                 Suites = new List<Suite>()
@@ -59,7 +63,7 @@ public class ReservationService
         }
     }
 
-    public bool ValidateCredentials(reservationSchema prop, ValidateCredentialsService verifyCredentials)
+    private bool ValidateCredentials(ReservationSchema prop, ValidateCredentialsService verifyCredentials)
     {
         if (!verifyCredentials.ValidateCpf(prop.Cpf)) return false;
         if (!verifyCredentials.ValidatePhone(prop.Phone)) return false;

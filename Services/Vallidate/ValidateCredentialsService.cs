@@ -182,4 +182,23 @@ public class ValidateCredentialsService
 
         return random;
     }
+
+    public decimal VerifyTypeSuite(string type)
+    {
+        switch (type)
+        {
+            case "alta": 
+                return 450.56M;
+            case "intermediario":
+                return 289.45M;
+            case "baixa":
+                return 100.87M;
+            
+        }
+
+        return 0.0M;
+    }
+
+
+   
 }
