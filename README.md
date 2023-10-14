@@ -49,16 +49,10 @@ dotnet ef database update
 CPF: 123.456.789-00
 Entry date: 2023-08-01
 Departure date: 2023-08-10
-Number of guests: 2
+Adults: 2
+Childrens: 1
+Daily : 400.56
+Days: 14
 Suite: Luxury
-```
-
-**The system will calculate the reservation value as:**
-
-```
-Daily price: R$500.00
-Discount: R$50.00
-Total value: R$ 450.00
-License
 ```
 - This project is licensed under the MIT License.
